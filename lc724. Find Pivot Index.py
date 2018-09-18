@@ -6,12 +6,11 @@ class Solution:
         """
         lsum = 0
         rsum = sum(nums)
-        for i in range(len(nums)):
-            lsum += nums[i]
-
+        for i, num in enumerate(nums):
+            lsum += num
             if lsum == rsum:
                 return i
-            rsum -= nums[i]
+            rsum -= num
         else:
             return -1
 
