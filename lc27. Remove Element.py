@@ -10,8 +10,10 @@ class Solution:
         idx1 = 0
         res = 0
         while idx1 != len(nums):
-            while nums[idx1] != val and idx1 != len(nums) - 1:
+            while idx1 != len(nums) and nums[idx1] != val:
                 idx1 += 1
+            if idx1 == len(nums):
+                return idx1
             res += 1
             idx2 = idx1 + 1
             while idx2 != len(nums) and nums[idx2] == val:
