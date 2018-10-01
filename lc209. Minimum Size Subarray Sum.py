@@ -5,40 +5,21 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
-        def bin_search(left, right, key, sums):
-            while left <= right:
-                mid = (left + right) // 2
-                if sums[mid] >= key:
-                    right = mid - 1
-                else:
-                    left = mid + 1
-            return left
+        left = right = su = 0
+        res = len(nums) + 1
+        while right < len(nums):
+            su += nums[right]
+            right += 1
+            if su >= s:
+                while su >= s:
+                    if right - left < res:
+                        res = right - left
+                    su -= nums[left]
+                    left += 1
+        return 0 if res == len(nums) + 1 else res
 
-        length = len(nums)
-        sums = [None] * (length + 1)
-        sums[0] = 0
 
-        for i in range(0, length):
-            sums[i + 1] = sums[i] + nums[i]
-
-        # 两层循环 O(N^2)解法
-        # for i in range(1, length + 1):
-        #     for j in range(length + 1 - i):
-        #         if sums[j + i] - sums[j] >= s:
-        #             return i
-
-        res = length + 1
-        for i in range(length + 1):
-            # sums[right]-sums[left]，不包括nums[left]
-            tem = bin_search(i + 1, length, sums[i] + s, sums)
-            if tem == length + 1:
-                break
-            if tem - i < res:
-                res = tem - i
-
-        return 0 if res == length + 1 else res
-
-s=100
-nums=[]
+s = 7
+nums = [2, 3, 1, 2, 4, 3]
 soln = Solution()
 print(soln.minSubArrayLen(s, nums))
