@@ -7,14 +7,16 @@ public:
             i++;
         }
         s.erase(s.begin(),s.begin()+i);
+        // 不应用索引，应该用迭代器
+        i=0;
         while(i<s.size()){
             
             
-            while(i<s.size()&&!isalnum(s[i])){
+            while(i<s.size()&&s[i]==' '){
                 i++;
             }
             j=i;
-            while(j!=s.size()&&isalnum(s[j])){
+            while(j!=s.size()&&s[j]!=' '){
                 j++;
             }
             reverse(s.begin()+i,s.begin()+j);
