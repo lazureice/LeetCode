@@ -6,20 +6,20 @@ class Solution:
         """
         operators = {'+', '-', '*', '/'}
         oprd = []
+        # use lambda expression
+        ops = {
+            '*': lambda x, y: x * y,
+            '+': lambda x, y: x + y,
+            '-': lambda x, y: x - y,
+            # int() trunc to 0
+            '/': lambda x, y: int(x / y),
+        }
 
         for tk in tokens:
             if tk in operators:
                 b = oprd.pop()
-                a = oprd.pop()
-                if tk == '+':
-                    c = a + b
-                elif tk == '-':
-                    c = a - b
-                elif tk == '*':
-                    c = a * b
-                else:
-                    c = int(a / b)
-                oprd.append(c)
+                # no need to pop another operand
+                oprd[-1] = ops[tk](oprd[-1], b)
             else:
                 oprd.append(int(tk))
         return oprd[0]
