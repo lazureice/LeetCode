@@ -1,6 +1,3 @@
-import queue
-
-
 class Solution:
 
     def numIslands(self, grid):
@@ -9,9 +6,6 @@ class Solution:
         :rtype: int
         """
         def bfs(i, j):
-            # while not q.empty():
-
-            # isl = q.get()
             if i < 0 or i >= length:
                 return
             if j < 0 or j >= length0:
@@ -27,8 +21,6 @@ class Solution:
         res = 0
         length = len(grid)
         length0 = len(grid[0])
-
-        # q = queue.Queue()
         visited = [[0] * length0 for i in range(length)]
 
         for i in range(length):
@@ -36,14 +28,13 @@ class Solution:
                 if not visited[i][j] and grid[i][j] == '1':
                     bfs(i, j)
                     res += 1
-
         return res
 
 
-snum = '''11110
-11010
+snum = '''11000
 11000
-00000'''
+00100
+00011'''
 slst = snum.split('\n')
 grid = [[int(x) for x in list(s)] for s in slst]
 soln = Solution()
