@@ -1,5 +1,6 @@
 from functools import lru_cache
 
+
 class Solution:
     def findTargetSumWays(self, nums, S):
         """
@@ -7,18 +8,14 @@ class Solution:
         :type S: int
         :rtype: int
         """
+        @lru_cache(None)
         def dfs(su, i):
             if i == len(nums):
-                if S == su:
-                    nonlocal res
-                    res += 1
-                return
-
-            dfs(su + nums[i], i + 1)
-            dfs(su - nums[i], i + 1)
-        res = 0
-        dfs(0, 0)
-        return res
+                return S == su
+            res1 = dfs(su + nums[i], i + 1)
+            res2 = dfs(su - nums[i], i + 1)
+            return res1 + res2
+        return dfs(0, 0)
 
 
 nums = [10, 9, 6, 4, 19, 0, 41, 30, 27, 15,
