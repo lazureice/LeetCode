@@ -5,10 +5,21 @@ class Solution:
         :rtype: str
         """
         stack = []
-        for c in s:
+        num = ''
+        i = 0
+        while i < len(s):
 
-            if c != ']':
-                stack.append(c)
+            if s[i].isnumeric():
+                while s[i].isnumeric():
+                    num += s[i]
+                    i += 1
+
+                stack.append(num)
+                num = ''
+
+            elif s[i] != ']':
+                stack.append(s[i])
+                i += 1
             else:
                 tem = ''
                 ch = stack.pop()
@@ -17,14 +28,15 @@ class Solution:
                     tem = ch + tem
                     ch = stack.pop()
                 if stack[-1].isnumeric():
-                    num = int(stack.pop())
+                    n = int(stack.pop())
                 else:
-                    num = 1
-                stack.append(tem * num)
+                    n = 1
+                stack.append(tem * n)
+                i += 1
 
         return ''.join(stack)
 
 
 sol = Solution()
-s = "3[a2[c]]"
+s = "100[leetcode]"
 print(sol.decodeString(s))
