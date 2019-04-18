@@ -29,7 +29,7 @@ class Solution:
         for i in range(height):
             for j in range(width):
                 if matrix[i][j] == 0:
-                    continue
+                    break
                 matrix[i][j] = bfs(i, j)
         return matrix
 
@@ -41,6 +41,5 @@ matrix = [
     [1, 0, 1, 1, 1],
     [1, 0, 0, 0, 1]
 ]
-
 s = Solution()
 print(s.updateMatrix(matrix))
