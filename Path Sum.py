@@ -16,15 +16,20 @@ class Solution:
 
         def dfs(root, tar):
             if not root:
-                return False
+                return
             if root.val == tar and root.left is None and root.right is None:
+                global res
+                res = True
                 # print(23, res)
-                return True
-            return dfs(root.left, tar - root.val) or dfs(root.right, tar - root.val)
+                return
+            dfs(root.left, tar - root.val)
+            dfs(root.right, tar - root.val)
 
         if not root:
             return False
-        return dfs(root, sum)
+        res = False
+        dfs(root, sum)
+        return res
 
 
 root = TreeNode(5)
